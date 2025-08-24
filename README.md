@@ -1,56 +1,106 @@
-<h1>🛒 SpringMall</h1>
-A cloud-native, fault-tolerant, and scalable e-commerce platform built using Spring Boot microservices. This project demonstrates best practices in distributed system design using Spring Cloud, JWT Security, Circuit Breakers, SAGA Pattern, and asynchronous messaging with RabbitMQ.
+# 🛒 SpringMall
 
-<h2>🚀 Features</h2>
+A cloud-native, fault-tolerant, and scalable **e-commerce platform** built using **Spring Boot microservices**. This project demonstrates best practices in distributed system design using **Spring Cloud**, **JWT Security**, **Circuit Breakers**, **SAGA Pattern**, and **asynchronous messaging** with **RabbitMQ**.
 
-✅ Microservices architecture using Spring Boot
-✅ JWT-based authentication & authorization
-✅ API Gateway for unified access and routing
-✅ Eureka Server for service discovery
-✅ Resilience4j circuit breaker for fault tolerance
-✅ Saga Pattern for distributed transaction management
-✅ REST APIs for synchronous communication
-✅ RabbitMQ for asynchronous event-driven messaging
-✅ Config Server for centralized configuration
-✅ Docker-ready architecture
+---
 
-<h2>🧱 Microservices List</h2>
-| Service                  | Description                                           |
-| ------------------------ | ----------------------------------------------------- |
-| **API Gateway**          | Entry point to the system; handles routing & security |
-| **Auth Service**         | Handles login, registration, JWT token generation     |
-| **User Service**         | Manages user profiles and roles                       |
-| **Product Service**      | Catalog management: CRUD operations on products       |
-| **Order Service**        | Manages orders, implements saga coordination          |
-| **Payment Service**      | Handles payment processing, communicates via RabbitMQ |
-| **Inventory Service**    | Tracks product stock levels and availability          |
-| **Notification Service** | Sends emails or messages for order events             |
-| **Config Server**        | Centralized configuration management                  |
-| **Eureka Server**        | Service registry and discovery                        |
+## 🚀 Features
 
-<h2>⚙️ Tech Stack</h2>
-**🔧 Backend**
+- ✅ Microservices architecture using Spring Boot
+- ✅ JWT-based authentication & authorization
+- ✅ API Gateway for unified access and routing
+- ✅ Eureka Server for service discovery
+- ✅ Resilience4j circuit breaker for fault tolerance
+- ✅ Saga Pattern for distributed transaction management
+- ✅ REST APIs for synchronous communication
+- ✅ RabbitMQ for asynchronous event-driven messaging
+- ✅ Config Server for centralized configuration
+- ✅ Docker-ready architecture (optional)
 
-Java 17+
+---
 
-Spring Boot
+## 🧱 Microservices List
 
-Spring Cloud (Gateway, Eureka, Config)
+| Microservice         | Description                                              |
+|----------------------|----------------------------------------------------------|
+| **API Gateway**      | Entry point to the system; handles routing & security    |
+| **Auth Service**     | Manages user login, registration, JWT token generation   |
+| **User Service**     | Handles user profiles and roles                          |
+| **Product Service**  | Manages product catalog and CRUD operations              |
+| **Order Service**    | Places and tracks orders; implements Saga coordination   |
+| **Payment Service**  | Simulates payment processing                             |
+| **Notification Service** | Sends emails or messages on order events             |
+| **Config Server**    | Centralized config management for all services           |
+| **Eureka Server**    | Service registry and discovery                           |
 
-Spring Security + JWT
+---
 
-Spring Web
+## ⚙️ Tech Stack
 
-Spring Data JPA
+### 🔧 Backend
+- Java 17+
+- Spring Boot
+- Spring Cloud (Gateway, Eureka, Config)
+- Spring Security + JWT
+- Spring Data JPA
+- Resilience4j (Circuit Breaker)
+- RabbitMQ
+- Saga Pattern (via choreography or orchestration)
+- Lombok
 
-Resilience4j (Circuit Breaker)
+### 🛢️ Databases
+- PostgreSQL
 
-RabbitMQ (AMQP Messaging)
+### 🐳 DevOps / Deployment
+- Docker
+- Docker Compose
 
-Saga Pattern (via choreography or orchestrator pattern)
+---
 
-Lombok
 
-</h2>🛢️ Databases</h2>
+---
 
-PostgreSQL 
+## 🔐 Security
+
+- Stateless authentication using **JWT**
+- Role-based access control (RBAC)
+- Token validation at API Gateway level
+- Secure endpoints using Spring Security
+
+---
+
+## 🔁 Communication Patterns
+
+- 🔄 **Synchronous**: REST APIs between services  
+  _(e.g., Order Service calling Product)_
+
+- 📩 **Asynchronous**: RabbitMQ used for events like:
+  - Sign up user → send notification to user via java mail
+  - Payment success → Inventory update
+
+---
+
+## 🔄 Distributed Transactions
+
+Implemented using the **Saga Pattern** to manage data consistency across distributed services using domain events and message brokers.
+
+---
+
+## 🏗️ How to Run Locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/MohdAqib8267/SpringMall
+cd SpringMall
+
+### 2. start Infrastructure
+
+docker-compose up -d
+
+### 3. Run Services Individually
+
+Use your IDE or terminal to run each microservice locally.
+Each service will register with Eureka and load config from the Config Server.
+
+
+
