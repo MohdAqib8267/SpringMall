@@ -45,7 +45,7 @@ A cloud-native, fault-tolerant, and scalable **e-commerce platform** built using
 - Spring Data JPA
 - Resilience4j (Circuit Breaker)
 - RabbitMQ
-- Saga Pattern (via choreography or orchestration)
+- Saga Pattern (via orchestration)
 - Lombok
 
 ### 🛢️ Databases
@@ -92,11 +92,11 @@ Implemented using the **Saga Pattern** to manage data consistency across distrib
 ```bash
 git clone https://github.com/MohdAqib8267/SpringMall
 cd SpringMall
-
+```
 ### 2. start Infrastructure
-
+```
 docker-compose up -d
-
+````
 ### 3. Run Services Individually
 
 Use your IDE or terminal to run each microservice locally.
