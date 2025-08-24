@@ -99,8 +99,8 @@ docker-compose up -d
 ````
 ### 3. Run Services Individually
 
-Use your IDE or terminal to run each microservice locally.
-Each service will register with Eureka and load config from the Config Server.
+- Use your IDE or terminal to run each microservice locally.
+- Each service will register with Eureka and load config from the Config Server.
 
 
 
