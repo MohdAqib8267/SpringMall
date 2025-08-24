@@ -1,0 +1,77 @@
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        orderCommunication-out-0:
+          destination: send-orderDetails
+    openfeign:
+      circuitbreaker:
+        enabled: true
+    compatibility-verifier:
+      enabled: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s
+  application:
+    name: order-service
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/orders"
+    username: "user"
+    password: "password"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+#  config:
+#    import: optional:configserver:http://localhost:8888
+#  kafka:
+#    producer:
+#      bootstrap-server: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.jsonSerializer
+#      properties:
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+endpoint:
+  shutdown:
+    enabled: true
+info:
+  app:
+    name: "Order service"
+    description: "Ecomm Order microservice"
+    version: "1.0.0"
+server:
+  port: 8082
+#        spring.json.type.mapping: orderConfirmation:com.example.Order.producer.OrderConfirmation
+resilience4j.circuitbreaker:
+    instances:
+      findProductWithOrderDetails:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state:
+          seconds: 10

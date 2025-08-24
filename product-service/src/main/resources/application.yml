@@ -1,0 +1,71 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+    config:
+      enabled: false
+    compatibility-verifier:
+      enabled: false
+  application:
+    name: "product-service"
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/products"
+    driver-class-name: "org.postgresql.Driver"
+    username: "user"
+    password: "password"
+
+  jpa:
+    hibernate:
+      ddl-auto: "update"
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+    generate-ddl: true
+
+application:
+  baseurl:
+    customer: "http://localhost:8080/api/v1/customers"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+info:
+  app:
+    name: "product service"
+    description: "Ecomm product microservce"
+    version: "1.0.0"
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 100ms
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      ignore-exceptions:
+        - java.lang.NullPointerException
+
+

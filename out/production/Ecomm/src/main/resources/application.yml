@@ -1,0 +1,60 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: "customer-service"
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/customer"
+    driver-class-name: "org.postgresql.Driver"
+    username: "user"
+    password: "password"
+
+  jpa:
+    hibernate:
+      ddl-auto: "update"
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+    generate-ddl: true
+
+#security.jwt.secret-key=3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+# 1h in millisecond
+#spring:
+#  application:
+#    name: "customer"
+#  config:
+#    import: "optional:configserver:http://localhost:8888/"
+security:
+  jwt:
+    expiration-time: "3600000"
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+info:
+  app:
+    name: "customer"
+    description: "Ecomm customer microservce"
+    version: "1.0.0"

@@ -1,0 +1,69 @@
+server:
+  port: 8762
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true
+          httpclient:
+            connect-timeout: 1000
+            response-timeout: 2s
+  application:
+    name: "gatewayserver"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "Gateway Server"
+    description: "Ecomm Gateway Server"
+    version: "1.0.0"
+
+logging:
+  level:
+    com:
+      ecomm:
+        gatewayserver: DEBUG
+
+#resilience4j.circuitbreaker:
+#    configs:
+#      default:  #this circuit breaker will call for all router(for a specific service we can give name like customerServiceCircuitBreaker
+#        sliding-window-size: 10 # means we telling circuit breaker to moniter at least 10 requests before making any decision
+#        permitted-number-of-calls-in-half-open-state: 2 # allow 2 requets when circuit in half-open state
+#        failure-rate-threshold: 50  # when 50% of the requests get fails, then move state close to open
+#        wait-duration-in-open-state:  # move to half-open state after 10 seconds from a close state and monitor 2 requests as above mention
+#          seconds: 10
+resilience4j.circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state:
+          seconds: 5
+
+

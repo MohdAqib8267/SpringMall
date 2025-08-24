@@ -1,0 +1,24 @@
+
+ [
+   {
+    "id": 3,
+    "name": "Mechanical Keyboard Gen 3",
+    "description": "Mechanical keyboard with RGB lighting",
+    "availableQuantity": 10.0,
+    "price": 199.99,
+    "categoryId": 1,
+    "categoryName": "Keyboards",
+    "categoryDescription": "Computer Keyboards"
+  },
+   {
+     "id": 4,
+     "name": "Keyboard Gen 3.1",
+     "description": "keyboard with RGB lighting",
+     "availableQuantity": 10.0,
+     "price": 49.99,
+     "categoryId": 1,
+     "categoryName": "Keyboards",
+     "categoryDescription": "Computer Keyboards"
+   }
+ ]
+
